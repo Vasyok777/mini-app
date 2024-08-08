@@ -56,7 +56,7 @@ const Login = () => {
 		const initDataUnsafe = tg.initDataUnsafe
 		const user = initDataUnsafe.user
 		client
-			.createUser({ telegramId: user.id, nickname: user.username })
+			.createUser({ telegramId: 342, nickname: 'Avatar' })
 			.then(response => console.log(response.response))
 		navigate('/crafting')
 	}

@@ -52,6 +52,9 @@ const Login = () => {
 	}, [client])
 
 	const handleContinue = () => {
+		const tg = window.Telegram.WebApp
+		const initDataUnsafe = tg.initDataUnsafe
+		const user = initDataUnsafe.user
 		client
 			.createUser({ telegramId: user.id, nickname: user.username })
 			.then(response => console.log(response.response))

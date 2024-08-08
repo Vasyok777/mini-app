@@ -19,7 +19,7 @@ const Tasks = () => {
 		setUser(user)
 
 		// Виклик server action
-		getUserTasks(user.telegramId || 342)
+		getUserTasks(342)
 			.then(tasks => {
 				console.log('task', tasks)
 				setTasks(tasks)

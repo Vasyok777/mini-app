@@ -27,7 +27,7 @@ const Tasks = () => {
 		// 	// setUser(response.response.message)
 		// })
 		client
-			.getUserTasks({ telegramId: user.id })
+			.getUserTasks({ telegramId: 342 })
 			.then(response => {
 				console.log('task', response.response.tasks)
 				setTasks(response.response.tasks)

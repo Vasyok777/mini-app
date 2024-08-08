@@ -30,7 +30,7 @@ const Login = () => {
 				setAvatarPreview(base64Avatar)
 
 				client
-					.setUserAvatar({ telegramId: user.id, avatarUrl: base64Avatar })
+					.setUserAvatar({ telegramId: 342, avatarUrl: base64Avatar })
 					.then(response => {
 						console.log('Avatar uploaded', response.response)
 						handleCancel() // Виклик handleCancel після успішного завантаження

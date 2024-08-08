@@ -24,7 +24,7 @@ const Avatar = ({ isEdit, src }) => {
 
 		setUsername(user?.username ? user.username[0].toUpperCase() : 'U')
 
-		client.getUserAvatar({ telegramId: user.id }).then(response => {
+		client.getUserAvatar({ telegramId: 342 }).then(response => {
 			if (response.response.avatar && response.response.avatar.avatarUrl) {
 				setAvatarUrl(response.response.avatar.avatarUrl)
 			}

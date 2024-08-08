@@ -1,3 +1,4 @@
+'use server'
 import { GrpcWebFetchTransport } from '@protobuf-ts/grpcweb-transport'
 import { useEffect, useState } from 'react'
 import { UserServiceClient } from '../../generated/user.client'

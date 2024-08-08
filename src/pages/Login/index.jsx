@@ -19,6 +19,7 @@ const Login = () => {
 	const client = new UserServiceClient(transport)
 
 	const handleUpload = event => {
+		'use server'
 		const file = event.target.files[0]
 		const tg = window.Telegram.WebApp
 		const initDataUnsafe = tg.initDataUnsafe
@@ -52,6 +53,7 @@ const Login = () => {
 	}, [client])
 
 	const handleContinue = () => {
+		'use server'
 		const tg = window.Telegram.WebApp
 		const initDataUnsafe = tg.initDataUnsafe
 		const user = initDataUnsafe.user

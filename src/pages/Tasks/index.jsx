@@ -1,9 +1,8 @@
-import { GrpcWebFetchTransport } from '@protobuf-ts/grpcweb-transport'
 import { useEffect, useState } from 'react'
 import Avatar from '../../components/Avatar'
 import FooterMenu from '../../components/blocks/FooterMenu'
 import AppTitle from '../../components/UI/AppTitle'
-import { UserServiceClient } from '../../generated/user.client'
+import { getUserTasks } from './serverActions' // Імпорт server action
 
 import './Tasks.scss'
 
@@ -12,25 +11,18 @@ const Tasks = () => {
 	const [error, setError] = useState(null)
 	const [user, setUser] = useState(null)
 
-	let transport = new GrpcWebFetchTransport({
-		baseUrl: 'http://5.61.54.103:50052',
-	})
-
-	const client = new UserServiceClient(transport)
-
 	useEffect(() => {
 		const tg = window.Telegram.WebApp
 		const initDataUnsafe = tg.initDataUnsafe
 		const user = initDataUnsafe.user
-		// client.getUser({ telegramId: 13 }).then(response => {
-		// 	console.log(response.response.user.nickname)
-		// 	// setUser(response.response.message)
-		// })
-		client
-			.getUserTasks({ telegramId: 342 })
-			.then(response => {
-				console.log('task', response.response.tasks)
-				setTasks(response.response.tasks)
+		// Зберігання користувача
+		setUser(user)
+
+		// Виклик server action
+		getUserTasks(user.telegramId || 342)
+			.then(tasks => {
+				console.log('task', tasks)
+				setTasks(tasks)
 			})
 			.catch(err => {
 				console.error('Error fetching tasks:', err)
@@ -44,7 +36,7 @@ const Tasks = () => {
 				<Avatar />
 			</div>
 			<AppTitle>
-				{tasks.length} tasks available{user}
+				{tasks.length} tasks available {user && user.username}
 			</AppTitle>
 			<p className='tasks__text'>
 				We’ll reward you immediately with points after each task completion

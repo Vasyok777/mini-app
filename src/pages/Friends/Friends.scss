@@ -1,0 +1,70 @@
+.friends {
+	padding-top: 52px;
+	padding-bottom: 110px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	&__ava {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+	&-steps {
+		border-radius: 12px;
+		border: 1px solid var(--modal-border);
+		background: var(--modal-bg);
+		padding: 40px;
+		margin-bottom: 10px;
+		display: flex;
+		gap: 30px;
+		&__left {
+			& svg {
+				& line {
+					stroke: var(--app-logo);
+				}
+				& circle {
+					stroke: var(--app-logo);
+					fill: var(--app-logo);
+				}
+			}
+		}
+		&__right {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			& h4 {
+				color: var(--app-logo);
+				font-size: 14px;
+				font-weight: 600;
+				line-height: 140%;
+			}
+			& p {
+				text-align: left;
+				// color: rgba(3, 6, 26, 0.5);
+				color: var(--friends-text);
+				font-size: 12px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 140%;
+			}
+		}
+	}
+	&__bottom {
+		margin-top: auto;
+	}
+	&__button {
+		border-radius: 12px;
+		background: var(--app-link-bg);
+		padding: 24px;
+		height: 62px;
+		color: var(--white);
+		font-size: 20px;
+		font-weight: 600;
+		line-height: 140%;
+		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+}

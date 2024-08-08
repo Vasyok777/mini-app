@@ -1,22 +1,15 @@
-'use server'
-import { GrpcWebFetchTransport } from '@protobuf-ts/grpcweb-transport'
 import { useEffect, useState } from 'react'
-import { UserServiceClient } from '../../generated/user.client'
 import './Avatar.scss'
 import AvatarSvg from './AvatarSvg'
+import { getUserAvatar } from './getUserAvatar'
 
 const Avatar = ({ isEdit, src }) => {
 	const [avatarUrl, setAvatarUrl] = useState(src || null) // Встановлюємо початковий URL
 	const [username, setUsername] = useState('U')
-	const transport = new GrpcWebFetchTransport({
-		baseUrl: 'http://5.61.54.103:50052',
-	})
 
 	const handleClick = () => {
 		document.body.classList.toggle('lock')
 	}
-
-	const client = new UserServiceClient(transport)
 
 	useEffect(() => {
 		const tg = window.Telegram.WebApp
@@ -25,12 +18,17 @@ const Avatar = ({ isEdit, src }) => {
 
 		setUsername(user?.username ? user.username[0].toUpperCase() : 'U')
 
-		client.getUserAvatar({ telegramId: 342 }).then(response => {
-			if (response.response.avatar && response.response.avatar.avatarUrl) {
-				setAvatarUrl(response.response.avatar.avatarUrl)
+		const fetchAvatar = async () => {
+			try {
+				const url = await getUserAvatar(342)
+				setAvatarUrl(url)
+			} catch (error) {
+				console.error('Error fetching avatar:', error)
 			}
-		})
-	}, [avatarUrl, client])
+		}
+
+		fetchAvatar()
+	}, [avatarUrl, src])
 
 	return (
 		<div className='avatar'>
